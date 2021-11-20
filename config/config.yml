@@ -1,0 +1,12 @@
+app:
+  name: 'fiber-blog'
+  version: '1.0.0'
+
+http:
+  port: '3000'
+
+logger:
+  log_level: 'debug'
+  rollbar_env: 'fiber-blog'
+
+
