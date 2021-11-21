@@ -8,11 +8,19 @@ import (
 //go:generate mockgen -source=interfaces.go -destination=./mocks_test.go -package=usecase_test
 
 type (
-	// ArticleRepo -.
+	Blog interface {
+		ArticleRepo
+		Advertise
+	}
+
 	ArticleRepo interface {
 		Add(entity.Article) (entity.ArticleID, error)
 		Delete(entity.ArticleID) error
 		Update(entity.Article) error
 		Retrieve(entity.ArticleID) (entity.Article, error)
+	}
+
+	Advertise interface {
+		GetAd() (entity.Ad, error)
 	}
 )

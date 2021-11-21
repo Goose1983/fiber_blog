@@ -10,12 +10,12 @@ import (
 	"fiber_blog/pkg/logger"
 )
 
-var useCase usecase.ArticleRepo
-var log logger.Interface
+var articleUseCase usecase.ArticleRepo
+var articleLog logger.Interface
 
 func newArticleRoutes(h fiber.Router, a usecase.ArticleRepo, l logger.Interface) {
-	useCase = a
-	log = l
+	articleUseCase = a
+	articleLog = l
 
 	h.Get("/articles/:id", retrieveArticle)
 	h.Put("/articles/:id", changeArticle)
@@ -32,7 +32,7 @@ func retrieveArticle(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	article, err := useCase.Retrieve(entity.ArticleID(id))
+	article, err := articleUseCase.Retrieve(entity.ArticleID(id))
 	if err != nil {
 		return err
 	}
@@ -62,7 +62,7 @@ func changeArticle(c *fiber.Ctx) error {
 
 	changeArticleRequest.Article.ID = entity.ArticleID(id) // TODO зачем, если в теле можно передавать?
 
-	err = useCase.Update(changeArticleRequest.Article)
+	err = articleUseCase.Update(changeArticleRequest.Article)
 	if err != nil {
 		return err
 	}
@@ -84,7 +84,7 @@ func createArticle(c *fiber.Ctx) error {
 		return err
 	}
 
-	articleID, err := useCase.Add(createArticleRequest.Article)
+	articleID, err := articleUseCase.Add(createArticleRequest.Article)
 	if err != nil {
 		return err
 	}
@@ -102,7 +102,7 @@ func deleteArticle(c *fiber.Ctx) error {
 		return err
 	}
 
-	err = useCase.Delete(entity.ArticleID(id))
+	err = articleUseCase.Delete(entity.ArticleID(id))
 	if err != nil {
 		return err
 	}

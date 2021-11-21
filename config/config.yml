@@ -9,4 +9,8 @@ logger:
   log_level: 'debug'
   rollbar_env: 'fiber-blog'
 
+advertising:
+  ad_url: 'https://developer.mozilla.org/en-US/docs/Learn/'
+
+
 

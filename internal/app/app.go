@@ -3,7 +3,9 @@ package app
 import (
 	"fiber_blog/config"
 	v1 "fiber_blog/internal/controller/http/v1"
+	"fiber_blog/internal/usecase"
 	"fiber_blog/internal/usecase/repo"
+	"fiber_blog/internal/usecase/webapi"
 	"fiber_blog/pkg/logger"
 	"fiber_blog/pkg/mapStorage"
 	"github.com/gofiber/fiber/v2"
@@ -19,7 +21,10 @@ func Run(cfg *config.Config) {
 	ms := mapStorage.New()
 
 	// Use case
-	blogUseCase := repo.New(ms)
+	blogUseCase := usecase.New(
+		repo.New(ms),
+		webapi.New(cfg.Ad.URL),
+	)
 
 	// HTTP Server
 	server := fiber.New()

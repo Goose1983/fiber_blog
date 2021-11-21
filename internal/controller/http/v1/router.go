@@ -10,7 +10,7 @@ import (
 )
 
 // NewRouter -.
-func NewRouter(fApp *fiber.App, l logger.Interface, a usecase.ArticleRepo) {
+func NewRouter(fApp *fiber.App, l logger.Interface, a usecase.Blog) {
 	// Options
 	fApp.Use(fiberLogger.New(fiberLogger.Config{
 		// For more options, see the Config section
@@ -22,4 +22,5 @@ func NewRouter(fApp *fiber.App, l logger.Interface, a usecase.ArticleRepo) {
 	g := fApp.Group("/v1")
 
 	newArticleRoutes(g, a, l)
+	newAdRoutes(g, a, l)
 }

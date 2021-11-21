@@ -6,6 +6,7 @@ type (
 		App  `yaml:"app"`
 		HTTP `yaml:"http"`
 		Log  `yaml:"logger"`
+		Ad   `yaml:"advertising"`
 	}
 
 	// App -.
@@ -22,5 +23,10 @@ type (
 	// Log -.
 	Log struct {
 		Level string `env-required:"true" yaml:"log_level"   env:"LOG_LEVEL"`
+	}
+
+	// Ad -.
+	Ad struct {
+		URL string `env-required:"true" yaml:"ad_url"   env:"AD_URL"`
 	}
 )
